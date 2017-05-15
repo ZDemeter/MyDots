@@ -1,0 +1,70 @@
+[core]
+	excludesfile = /Users/ZDemeter/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+# Required stuff
+[user]
+  name = Zsolt Demeter
+  email = zsolt.demeter@telavox.se
+[core]
+  # Global excludes-fil. Användbar för vanliga tempfiländelser
+  excludesfile = ~/.gitignore
+
+  # Assert git do not touch line endings
+  whitespace = cr-at-eol
+  autocrlf = false
+	editor = vim
+
+[branch]
+  # Pulling a branch should execute a _rebase_, not merge.
+  autosetuprebase = always
+[merge]
+  # Ask for a merge commit message when merging
+  log = true
+[rebase]
+  # ...om man inte alltid vill specificera `--autosquash` till
+  # `git rebase`.
+  autosquash = true
+[rerere]
+  # Enable remembering conflict resolution. See http://goo.gl/hdAsi3
+  enabled = true
+
+# Optional GIT candy
+[alias]
+  # Beautiful logs
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+
+  # http://bit.ly/vZMVTL
+  fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  ri = rebase --interactive --autosquash
+  # Easy stash apply and show
+  sapply = "!f() { git stash apply stash^{/$}; }; f"
+  sshow = "!f() { git stash show stash^{/$}; }; f"
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[push]
+	default = simple
